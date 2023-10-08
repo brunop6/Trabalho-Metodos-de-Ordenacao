@@ -65,6 +65,22 @@ void bubbleSort(string vet[], int n) {
   //for(int i = 0; i < n; i++) cout << vet[i] << endl;
 }
 
+void selectionSort(string vet[], int n){
+	string aux;
+	int menor;
+	
+	for(int i = 0; i < n-1; i++){
+		menor = i;
+		for(int j = (i+1); j < n; j++){
+			if(vet[j] < vet[menor])
+				menor = j;
+		}
+		aux = vet[i];
+		vet[i] = vet[menor];
+		vet[menor] = aux;
+	}
+}
+
 void insertionSort(string vet[], int n) {
   string aux;
   int j;
