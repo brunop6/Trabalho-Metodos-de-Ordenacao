@@ -173,6 +173,14 @@ int main() {
       shellT20, 
       shellT30, 
       shellT40;
+//Tempos merge sort
+  int mergeT1, 
+      mergeT5, 
+      mergeT10, 
+      mergeT15, 
+      mergeT20, 
+      mergeT30, 
+      mergeT40;
   //Tempos quick sort
   int quickT1, 
       quickT5, 
