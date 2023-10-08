@@ -334,7 +334,7 @@ int main() {
     endTime = (int) clock();
     selectionT40 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
     //Impressão da tabela parcial
-    cout << "\nn\tBubble\t" << endl;
+    cout << "\nn\tSelection\t" << endl;
     cout << "1000\t" << selectionT1 << endl;
     cout << "5000\t" << selectionT5 << endl;
     cout << "10000\t" << selectionT10 << endl;
@@ -499,7 +499,7 @@ int main() {
     endTime = (int) clock();
     mergeT40 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
     //Impressão da tabela parcial
-    cout << "\nn\tInsertion\t" << endl;
+    cout << "\nn\tMerge\t" << endl;
     cout << "1000\t" << mergeT1 << endl;
     cout << "5000\t" << mergeT5 << endl;
     cout << "10000\t" << mergeT10 << endl;
