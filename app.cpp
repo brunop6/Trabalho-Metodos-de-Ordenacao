@@ -36,19 +36,12 @@ bool createArrays() {
     }
     file.close();
 
-    system("cls");
     return true;
   }else {
     return false;
   }
 }
 
-/*
-Realizando a passagem por valor e não por referência
-para manter desordenado para os próximos algoritmos.
-Obs.: Os valores não serão retornados pois nos interessa apenas
-os tempos gastos em ordenação;
-*/
 void bubbleSort(string vet[], int n) {
   string aux;
 
@@ -94,8 +87,26 @@ void insertionSort(string vet[], int n) {
 
   //for(int i = 0; i < n; i++) cout << vet[i] << endl;
 }
+ 
+void shellSort(string vet[], int n) {
+  string aux;
+  int j, h = n/2;
+
+  while(h >= 1) {
+    for(int i = 1; i < n; i++) {
+      aux = vet[i];
+      for(j = i-h; (j >= 0) && (vet[j] > aux); j-=h)
+        vet[j+h] = vet[j];
+      vet[j+h] = aux;
+    }
+    h/=2;
+  }
+  
+  //for(int i = 0; i < n; i++) cout << vet[i] << endl;
+}
 
 int main() {
+  system("cls");
   /*
   Salvaremos os tempos em variáveis individuais afim de
   melhorar a vizualização da tabela final
@@ -119,6 +130,14 @@ int main() {
       insertionT20, 
       insertionT30, 
       insertionT40;
+  //Tempos shell sort
+  int shellT1, 
+      shellT5, 
+      shellT10, 
+      shellT15, 
+      shellT20, 
+      shellT30, 
+      shellT40;
 
   //Valida a criação dos vetores com os valores do arquivo p/ prosseguir
   if(createArrays()){
@@ -182,7 +201,7 @@ int main() {
     
     //IMPLEMENTAÇÕES INSERTION SORT
     //n = 1000
-    cout << "Insertion Sort 1k" << endl;
+    cout << "\nInsertion Sort 1k" << endl;
     iniTime = (int) clock();
     insertionSort(vet1, V1LEN);
     endTime = (int) clock();
@@ -235,16 +254,71 @@ int main() {
     //Recriando os vetores desordenados
     createArrays();
     
+    //IMPLEMENTAÇÕES SHELL SORT
+    //n = 1000
+    cout << "\nShell Sort 1k" << endl;
+    iniTime = (int) clock();
+    shellSort(vet1, V1LEN);
+    endTime = (int) clock();
+    shellT1 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 5000
+    cout << "Shell Sort 5k" << endl;
+    iniTime = (int) clock();
+    shellSort(vet5, V5LEN);
+    endTime = (int) clock();
+    shellT5 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 10000
+    cout << "Shell Sort 10k" << endl;
+    iniTime = (int) clock();
+    shellSort(vet10, V10LEN);
+    endTime = (int) clock();
+    shellT10 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 15000
+    cout << "Shell Sort 15k" << endl;
+    iniTime = (int) clock();
+    shellSort(vet15, V15LEN);
+    endTime = (int) clock();
+    shellT15 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 20000
+    cout << "Shell Sort 20k" << endl;
+    iniTime = (int) clock();
+    shellSort(vet20, V20LEN);
+    endTime = (int) clock();
+    shellT20 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 30000
+    cout << "Shell Sort 30k" << endl;
+    iniTime = (int) clock();
+    shellSort(vet30, V30LEN);
+    endTime = (int) clock();
+    shellT30 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 40000
+    cout << "Shell Sort 40k" << endl;
+    iniTime = (int) clock();
+    shellSort(vet40, V40LEN);
+    endTime = (int) clock();
+    shellT40 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //Impressão da tabela parcial
+    cout << "\nn\tShell\t" << endl;
+    cout << "1000\t" << shellT1 << endl;
+    cout << "5000\t" << shellT5 << endl;
+    cout << "10000\t" << shellT10 << endl;
+    cout << "15000\t" << shellT15 << endl;
+    cout << "20000\t" << shellT20 << endl;
+    cout << "30000\t" << shellT30 << endl;
+    cout << "40000\t" << shellT40 << endl;
+    //Recriando os vetores desordenados
+    createArrays();
+
     //Impressão da tabela final
     cout << "\nTabela Final\n" << endl;
-    cout << "\nn\tBubble\tSelection\tInsertion" << endl;
-    cout << "1000\t"<< bubbleT1<<"\t"<<0<<"\t"<<insertionT1<<endl;
-    cout << "5000\t"<< bubbleT5<<"\t"<<0<<"\t"<<insertionT5<<endl;
-    cout << "10000\t"<<bubbleT10<<"\t"<<0<<"\t"<<insertionT10<<endl;
-    cout << "15000\t"<<bubbleT15<<"\t"<<0<<"\t"<<insertionT15<<endl;
-    cout << "20000\t"<<bubbleT20<<"\t"<<0<<"\t"<<insertionT20<<endl;
-    cout << "30000\t"<<bubbleT30<<"\t"<<0<<"\t"<<insertionT30<<endl;
-    cout << "40000\t"<<bubbleT40<<"\t"<<0<<"\t"<<insertionT40<<endl;
+    cout << "n    \tBubble \t\tSelection \tInsertion \tShell" << endl;
+    cout << "1000 \t"<< bubbleT1<<"\t\t"<<0<<"\t\t"<< insertionT1<<"\t\t"<< shellT1<<endl;
+    cout << "5000 \t"<< bubbleT5<<"\t\t"<<0<<"\t\t"<< insertionT5<<"\t\t"<< shellT5<<endl;
+    cout << "10000\t"<<bubbleT10<<"\t\t"<<0<<"\t\t"<<insertionT10<<"\t\t"<<shellT10<<endl;
+    cout << "15000\t"<<bubbleT15<<"\t\t"<<0<<"\t\t"<<insertionT15<<"\t\t"<<shellT15<<endl;
+    cout << "20000\t"<<bubbleT20<<"\t\t"<<0<<"\t\t"<<insertionT20<<"\t\t"<<shellT20<<endl;
+    cout << "30000\t"<<bubbleT30<<"\t\t"<<0<<"\t\t"<<insertionT30<<"\t\t"<<shellT30<<endl;
+    cout << "40000\t"<<bubbleT40<<"\t\t"<<0<<"\t\t"<<insertionT40<<"\t\t"<<shellT40<<endl;
   } else {
     cout << "Erro ao abrir arquivo..." << endl;
   }
