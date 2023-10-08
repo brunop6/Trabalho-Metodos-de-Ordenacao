@@ -105,6 +105,49 @@ void shellSort(string vet[], int n) {
   //for(int i = 0; i < n; i++) cout << vet[i] << endl;
 }
 
+void mergeIntercala(string *vet, string *aux, int ini, int meio, int fin){
+  int atual, fimEsq, n;
+  atual = ini;
+  fimEsq = meio - 1;
+  n = fin - ini + 1;
+
+  while ((ini <= fimEsq) && (meio <= fin))
+  {
+    if(vet[ini] <= vet[meio])
+      aux[atual++] = vet[ini++];
+    else
+      aux[atual++] = vet[meio++];
+  }
+
+  while (ini <= fimEsq)
+    aux[atual++] = vet[ini++];
+
+  while(meio <= fin)
+    aux[atual++] = vet[meio++];
+
+  for(int i = 0; i < n; i++){
+    vet[fin] = aux[fin];
+    fin--;
+  }
+  
+}
+
+void mergeDivide(string *vet, string *aux, int ini, int fin){
+  int meio;
+
+  if(fin > ini){
+    meio = (fin+ini)/2;
+    mergeDivide(vet, aux, ini, meio);
+    mergeDivide(vet, aux, meio+1, fin);
+    mergeIntercala(vet, aux, ini, meio+1, fin);
+  }
+}
+
+void merge(string *vet, int n){
+  string aux[n];
+  mergeDivide(vet, aux, 0, n-1);
+}
+
 int partition(string vet[], int esq, int dir){
   int i = esq, j = dir; 
   string aux, pivo = vet[esq];
@@ -411,6 +454,61 @@ int main() {
     cout << "40000\t" << shellT40 << endl;
     //Recriando os vetores desordenados
     createArrays();
+
+    //IMPLEMENTAÇÕES MERGE SORT
+    //n = 1000
+    cout << "\nMerge Sort 1k" << endl;
+    iniTime = (int) clock();
+    merge(vet1, V1LEN);
+    endTime = (int) clock();
+    mergeT1 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 5000
+    cout << "Merge Sort 5k" << endl;
+    iniTime = (int) clock();
+    merge(vet5, V5LEN);
+    endTime = (int) clock();
+    mergeT5 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 10000
+    cout << "Merge Sort 10k" << endl;
+    iniTime = (int) clock();
+    merge(vet10, V10LEN);
+    endTime = (int) clock();
+    mergeT10 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 15000
+    cout << "Merge Sort 15k" << endl;
+    iniTime = (int) clock();
+    merge(vet15, V15LEN);
+    endTime = (int) clock();
+    mergeT15 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 20000
+    cout << "Merge Sort 20k" << endl;
+    iniTime = (int) clock();
+    merge(vet20, V20LEN);
+    endTime = (int) clock();
+    mergeT20 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 30000
+    cout << "Merge Sort 30k" << endl;
+    iniTime = (int) clock();
+    merge(vet30, V30LEN);
+    endTime = (int) clock();
+    mergeT30 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 40000
+    cout << "Merge Sort 40k" << endl;
+    iniTime = (int) clock();
+    merge(vet40, V40LEN);
+    endTime = (int) clock();
+    mergeT40 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //Impressão da tabela parcial
+    cout << "\nn\tInsertion\t" << endl;
+    cout << "1000\t" << mergeT1 << endl;
+    cout << "5000\t" << mergeT5 << endl;
+    cout << "10000\t" << mergeT10 << endl;
+    cout << "15000\t" << mergeT15 << endl;
+    cout << "20000\t" << mergeT20 << endl;
+    cout << "30000\t" << mergeT30 << endl;
+    cout << "40000\t" << mergeT40 << endl;
+    //Recriando os vetores desordenados
+    createArrays();
   
     //IMPLEMENTAÇÕES QUICK SORT
     //n = 1000
@@ -468,13 +566,13 @@ int main() {
     //Impressão da tabela final
     cout << "\nTabela Final\n" << endl;
     cout << "n    \tBubble \t\tSelection \tInsertion \tShell \t\tMerge \t\tQuick" << endl;
-    cout << "1000 \t"<< bubbleT1<<"\t\t"<< selectionT1<<"\t\t"<< insertionT1<<"\t\t"<< shellT1<<"\t\t"<<0<<"\t\t"<< quickT1<<endl;
-    cout << "5000 \t"<< bubbleT5<<"\t\t"<< selectionT5<<"\t\t"<< insertionT5<<"\t\t"<< shellT5<<"\t\t"<<0<<"\t\t"<< quickT5<<endl;
-    cout << "10000\t"<<bubbleT10<<"\t\t"<<selectionT10<<"\t\t"<<insertionT10<<"\t\t"<<shellT10<<"\t\t"<<0<<"\t\t"<<quickT10<<endl;
-    cout << "15000\t"<<bubbleT15<<"\t\t"<<selectionT15<<"\t\t"<<insertionT15<<"\t\t"<<shellT15<<"\t\t"<<0<<"\t\t"<<quickT15<<endl;
-    cout << "20000\t"<<bubbleT20<<"\t\t"<<selectionT20<<"\t\t"<<insertionT20<<"\t\t"<<shellT20<<"\t\t"<<0<<"\t\t"<<quickT20<<endl;
-    cout << "30000\t"<<bubbleT30<<"\t\t"<<selectionT30<<"\t\t"<<insertionT30<<"\t\t"<<shellT30<<"\t\t"<<0<<"\t\t"<<quickT30<<endl;
-    cout << "40000\t"<<bubbleT40<<"\t\t"<<selectionT40<<"\t\t"<<insertionT40<<"\t\t"<<shellT40<<"\t\t"<<0<<"\t\t"<<quickT40<<endl;
+    cout << "1000 \t"<< bubbleT1<<"\t\t"<< selectionT1<<"\t\t"<< insertionT1<<"\t\t"<< shellT1<<"\t\t"<<mergeT1<<"\t\t"<< quickT1<<endl;
+    cout << "5000 \t"<< bubbleT5<<"\t\t"<< selectionT5<<"\t\t"<< insertionT5<<"\t\t"<< shellT5<<"\t\t"<<mergeT5<<"\t\t"<< quickT5<<endl;
+    cout << "10000\t"<<bubbleT10<<"\t\t"<<selectionT10<<"\t\t"<<insertionT10<<"\t\t"<<shellT10<<"\t\t"<<mergeT10<<"\t\t"<<quickT10<<endl;
+    cout << "15000\t"<<bubbleT15<<"\t\t"<<selectionT15<<"\t\t"<<insertionT15<<"\t\t"<<shellT15<<"\t\t"<<mergeT15<<"\t\t"<<quickT15<<endl;
+    cout << "20000\t"<<bubbleT20<<"\t\t"<<selectionT20<<"\t\t"<<insertionT20<<"\t\t"<<shellT20<<"\t\t"<<mergeT20<<"\t\t"<<quickT20<<endl;
+    cout << "30000\t"<<bubbleT30<<"\t\t"<<selectionT30<<"\t\t"<<insertionT30<<"\t\t"<<shellT30<<"\t\t"<<mergeT30<<"\t\t"<<quickT30<<endl;
+    cout << "40000\t"<<bubbleT40<<"\t\t"<<selectionT40<<"\t\t"<<insertionT40<<"\t\t"<<shellT40<<"\t\t"<<mergeT40<<"\t\t"<<quickT40<<endl;
   } else {
     cout << "Erro ao abrir arquivo..." << endl;
   }
