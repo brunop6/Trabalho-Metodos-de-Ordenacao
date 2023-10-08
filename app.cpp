@@ -111,6 +111,13 @@ int main() {
       bubbleT30, 
       bubbleT40;
   //Tempos selection sort
+  int selectionT1, 
+      selectionT5, 
+      selectionT10, 
+      selectionT15, 
+      selectionT20, 
+      selectionT30, 
+      selectionT40;
   //Tempos insertion sort
   int insertionT1, 
       insertionT5, 
@@ -178,7 +185,59 @@ int main() {
     createArrays();
     
     //IMPLEMENTAÇÕES SELECTION SORT
-    //...
+    //n = 1000
+    cout << "Selection Sort 1k" << endl;
+    iniTime = (int) clock();
+    selectionSort(vet1, V1LEN);
+    endTime = (int) clock();
+    selectionT1 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 5000
+    cout << "Selection Sort 5k" << endl;
+    iniTime = (int) clock();
+    selectionSort(vet5, V5LEN);
+    endTime = (int) clock();
+    selectionT5 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 10000
+    cout << "Selection Sort 10k" << endl;
+    iniTime = (int) clock();
+    selectionSort(vet10, V10LEN);
+    endTime = (int) clock();
+    selectionT10 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 15000
+    cout << "Selection Sort 15k" << endl;
+    iniTime = (int) clock();
+    selectionSort(vet15, V15LEN);
+    endTime = (int) clock();
+    selectionT15 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 20000
+    cout << "Selection Sort 20k" << endl;
+    iniTime = (int) clock();
+    selectionSort(vet20, V20LEN);
+    endTime = (int) clock();
+    selectionT20 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 30000
+    cout << "Selection Sort 30k" << endl;
+    iniTime = (int) clock();
+    selectionSort(vet30, V30LEN);
+    endTime = (int) clock();
+    selectionT30 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 40000
+    cout << "Selection Sort 40k" << endl;
+    iniTime = (int) clock();
+    selectionSort(vet40, V40LEN);
+    endTime = (int) clock();
+    selectionT40 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //Impressão da tabela parcial
+    cout << "\nn\tBubble\t" << endl;
+    cout << "1000\t" << selectionT1 << endl;
+    cout << "5000\t" << selectionT5 << endl;
+    cout << "10000\t" << selectionT10 << endl;
+    cout << "15000\t" << selectionT15 << endl;
+    cout << "20000\t" << selectionT20 << endl;
+    cout << "30000\t" << selectionT30 << endl;
+    cout << "40000\t" << selectionT40 << endl;
+    //Recriando os vetores desordenados
+    createArrays();
     
     //IMPLEMENTAÇÕES INSERTION SORT
     //n = 1000
@@ -238,13 +297,13 @@ int main() {
     //Impressão da tabela final
     cout << "\nTabela Final\n" << endl;
     cout << "\nn\tBubble\tSelection\tInsertion" << endl;
-    cout << "1000\t"<< bubbleT1<<"\t"<<0<<"\t"<<insertionT1<<endl;
-    cout << "5000\t"<< bubbleT5<<"\t"<<0<<"\t"<<insertionT5<<endl;
-    cout << "10000\t"<<bubbleT10<<"\t"<<0<<"\t"<<insertionT10<<endl;
-    cout << "15000\t"<<bubbleT15<<"\t"<<0<<"\t"<<insertionT15<<endl;
-    cout << "20000\t"<<bubbleT20<<"\t"<<0<<"\t"<<insertionT20<<endl;
-    cout << "30000\t"<<bubbleT30<<"\t"<<0<<"\t"<<insertionT30<<endl;
-    cout << "40000\t"<<bubbleT40<<"\t"<<0<<"\t"<<insertionT40<<endl;
+    cout << "1000\t"<< bubbleT1<<"\t"<<selectionT1<<"\t"<<insertionT1<<endl;
+    cout << "5000\t"<< bubbleT5<<"\t"<<selectionT5<<"\t"<<insertionT5<<endl;
+    cout << "10000\t"<<bubbleT10<<"\t"<<selectionT10<<"\t"<<insertionT10<<endl;
+    cout << "15000\t"<<bubbleT15<<"\t"<<selectionT15<<"\t"<<insertionT15<<endl;
+    cout << "20000\t"<<bubbleT20<<"\t"<<selectionT20<<"\t"<<insertionT20<<endl;
+    cout << "30000\t"<<bubbleT30<<"\t"<<selectionT30<<"\t"<<insertionT30<<endl;
+    cout << "40000\t"<<bubbleT40<<"\t"<<selectionT40<<"\t"<<insertionT40<<endl;
   } else {
     cout << "Erro ao abrir arquivo..." << endl;
   }
