@@ -105,6 +105,34 @@ void shellSort(string vet[], int n) {
   //for(int i = 0; i < n; i++) cout << vet[i] << endl;
 }
 
+int partition(string vet[], int esq, int dir){
+  int i = esq, j = dir; 
+  string aux, pivo = vet[esq];
+
+  while(i < j){
+    while((vet[i] <= pivo) && (i < dir)) i++;
+    while((vet[j] >= pivo) && (j > esq)) j--;
+
+    if(i < j) {
+      aux = vet[j];
+      vet[j] = vet[i];
+      vet[i] = aux;
+    }
+  }
+  
+  vet[esq] = vet[j];
+  vet[j] = pivo;
+  return j;
+}
+
+void quickSort(string vet[], int esq, int dir) {
+  if(esq < dir) {
+    int pivo = partition(vet, esq, dir);
+    quickSort(vet, esq, pivo-1);
+    quickSort(vet, pivo+1, dir);
+  }
+}
+
 int main() {
   system("cls");
   /*
@@ -145,6 +173,14 @@ int main() {
       shellT20, 
       shellT30, 
       shellT40;
+  //Tempos quick sort
+  int quickT1, 
+      quickT5, 
+      quickT10, 
+      quickT15, 
+      quickT20, 
+      quickT30, 
+      quickT40;
 
   //Valida a criação dos vetores com os valores do arquivo p/ prosseguir
   if(createArrays()){
@@ -367,17 +403,70 @@ int main() {
     cout << "40000\t" << shellT40 << endl;
     //Recriando os vetores desordenados
     createArrays();
+  
+    //IMPLEMENTAÇÕES QUICK SORT
+    //n = 1000
+    cout << "Quick Sort 1k" << endl;
+    iniTime = (int) clock();
+    quickSort(vet1, 0, V1LEN-1);
+    endTime = (int) clock();
+    quickT1 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 5000
+    cout << "Quick Sort 5k" << endl;
+    iniTime = (int) clock();
+    quickSort(vet5, 0, V5LEN-1);
+    endTime = (int) clock();
+    quickT5 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 10000
+    cout << "Quick Sort 10k" << endl;
+    iniTime = (int) clock();
+    quickSort(vet10, 0, V10LEN-1);
+    endTime = (int) clock();
+    quickT10 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 15000
+    cout << "Quick Sort 15k" << endl;
+    iniTime = (int) clock();
+    quickSort(vet15, 0, V15LEN-1);
+    endTime = (int) clock();
+    quickT15 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 20000
+    cout << "Quick Sort 20k" << endl;
+    iniTime = (int) clock();
+    quickSort(vet20, 0, V20LEN-1);
+    endTime = (int) clock();
+    quickT20 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 30000
+    cout << "Quick Sort 30k" << endl;
+    iniTime = (int) clock();
+    quickSort(vet30, 0, V30LEN-1);
+    endTime = (int) clock();
+    quickT30 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //n = 40000
+    cout << "Quick Sort 40k" << endl;
+    iniTime = (int) clock();
+    quickSort(vet40, 0, V40LEN-1);
+    endTime = (int) clock();
+    quickT40 = ((endTime - iniTime)*1000/CLOCKS_PER_SEC);
+    //Impressão da tabela parcial
+    cout << "\nn\tQuick\t" << endl;
+    cout << "1000\t" << quickT1 << endl;
+    cout << "5000\t" << quickT5 << endl;
+    cout << "10000\t" << quickT10 << endl;
+    cout << "15000\t" << quickT15 << endl;
+    cout << "20000\t" << quickT20 << endl;
+    cout << "30000\t" << quickT30 << endl;
+    cout << "40000\t" << quickT40 << endl;
 
     //Impressão da tabela final
     cout << "\nTabela Final\n" << endl;
-    cout << "n    \tBubble \t\tSelection \tInsertion \tShell" << endl;
-    cout << "1000 \t"<< bubbleT1<<"\t\t"<<selectionT1<<"\t\t"<< insertionT1<<"\t\t"<< shellT1<<endl;
-    cout << "5000 \t"<< bubbleT5<<"\t\t"<<selectionT5<<"\t\t"<< insertionT5<<"\t\t"<< shellT5<<endl;
-    cout << "10000\t"<<bubbleT10<<"\t\t"<<selectionT10<<"\t\t"<<insertionT10<<"\t\t"<<shellT10<<endl;
-    cout << "15000\t"<<bubbleT15<<"\t\t"<<selectionT15<<"\t\t"<<insertionT15<<"\t\t"<<shellT15<<endl;
-    cout << "20000\t"<<bubbleT20<<"\t\t"<<selectionT20<<"\t\t"<<insertionT20<<"\t\t"<<shellT20<<endl;
-    cout << "30000\t"<<bubbleT30<<"\t\t"<<selectionT30<<"\t\t"<<insertionT30<<"\t\t"<<shellT30<<endl;
-    cout << "40000\t"<<bubbleT40<<"\t\t"<<selectionT40<<"\t\t"<<insertionT40<<"\t\t"<<shellT40<<endl;
+    cout << "n    \tBubble \t\tSelection \tInsertion \tShell \t\tMerge \t\tQuick" << endl;
+    cout << "1000 \t"<< bubbleT1<<"\t\t"<< selectionT1<<"\t\t"<< insertionT1<<"\t\t"<< shellT1<<"\t\t"<<0<<"\t\t"<< quickT1<<endl;
+    cout << "5000 \t"<< bubbleT5<<"\t\t"<< selectionT5<<"\t\t"<< insertionT5<<"\t\t"<< shellT5<<"\t\t"<<0<<"\t\t"<< quickT5<<endl;
+    cout << "10000\t"<<bubbleT10<<"\t\t"<<selectionT10<<"\t\t"<<insertionT10<<"\t\t"<<shellT10<<"\t\t"<<0<<"\t\t"<<quickT10<<endl;
+    cout << "15000\t"<<bubbleT15<<"\t\t"<<selectionT15<<"\t\t"<<insertionT15<<"\t\t"<<shellT15<<"\t\t"<<0<<"\t\t"<<quickT15<<endl;
+    cout << "20000\t"<<bubbleT20<<"\t\t"<<selectionT20<<"\t\t"<<insertionT20<<"\t\t"<<shellT20<<"\t\t"<<0<<"\t\t"<<quickT20<<endl;
+    cout << "30000\t"<<bubbleT30<<"\t\t"<<selectionT30<<"\t\t"<<insertionT30<<"\t\t"<<shellT30<<"\t\t"<<0<<"\t\t"<<quickT30<<endl;
+    cout << "40000\t"<<bubbleT40<<"\t\t"<<selectionT40<<"\t\t"<<insertionT40<<"\t\t"<<shellT40<<"\t\t"<<0<<"\t\t"<<quickT40<<endl;
   } else {
     cout << "Erro ao abrir arquivo..." << endl;
   }
